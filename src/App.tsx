@@ -1,5 +1,6 @@
-import { Button } from './components/ui/button'
 import './styles/globals.css'
+
+import { Button } from './components/ui/button'
 
 export function App() {
   return (
