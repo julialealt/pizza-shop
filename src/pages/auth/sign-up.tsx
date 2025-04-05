@@ -1,10 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import * as zod from 'zod'
 
+import { registerRestaurant } from '@/api/register-restaurant'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -22,19 +24,30 @@ export function SignUp() {
   const navigate = useNavigate()
 
   const {
-    register, handleSubmit, formState: { isSubmitting },
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
   } = useForm<SignUpForm>({
     resolver: zodResolver(signUpForm),
   })
 
+  const { mutateAsync: registerRestaurantFn } = useMutation({
+    mutationFn: registerRestaurant,
+  })
+
   async function handleSignUp(data: SignUpForm) {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      await registerRestaurantFn({
+        restaurantName: data.restaurantName,
+        managerName: data.managerName,
+        email: data.email,
+        phone: data.phone,
+      })
 
       toast.success('Restaurante cadastrado com sucesso!', {
         action: {
           label: 'Login',
-          onClick: () => navigate('/sign-in'),
+          onClick: () => navigate(`/sign-in?email=${data.email}`),
         },
       })
     } catch {
@@ -81,37 +94,28 @@ export function SignUp() {
 
             <div className="space-y-2">
               <Label htmlFor="email">Seu e-mail</Label>
-              <Input
-                id="email"
-                type="email"
-                {...register('email')}
-              />
+              <Input id="email" type="email" {...register('email')} />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="phone">Seu celular</Label>
-              <Input
-                id="phone"
-                type="tel"
-                {...register('phone')}
-              />
+              <Input id="phone" type="tel" {...register('phone')} />
             </div>
 
             <Button className="w-full" type="submit" disabled={isSubmitting}>
               Finalizar cadastro
             </Button>
 
-            <p
-              className="px-6 text-center text-xs leading-relaxed text-muted-foreground"
-            >
+            <p className="px-6 text-center text-xs leading-relaxed text-muted-foreground">
               Ao continuar, você concorda com nossos{' '}
               <a className="underline underline-offset-4" href="">
                 termos de serviço
               </a>{' '}
-              e {' '}
+              e{' '}
               <a className="underline underline-offset-4" href="">
                 políticas de privacidade
-              </a>.
+              </a>
+              .
             </p>
           </form>
         </div>
