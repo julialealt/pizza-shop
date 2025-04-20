@@ -1,8 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
-import { TableCell, TableRow } from "@/components/ui/table";
-import { ArrowRight, Search, X } from "lucide-react";
-import { OrderDetails } from "./order-details";
+import { ArrowRight, Search, X } from 'lucide-react'
+
+import { Button } from '@/components/ui/button'
+import { Dialog, DialogTrigger } from '@/components/ui/dialog'
+import { TableCell, TableRow } from '@/components/ui/table'
+
+import { OrderDetails } from './order-details'
 
 export function OrderTableRow() {
   return (
@@ -22,18 +24,14 @@ export function OrderTableRow() {
       <TableCell className="font-mono text-sm font-medium">
         8dvfdv4564fdsvf8
       </TableCell>
-      <TableCell className="text-muted-foreground">
-        há 15 minutos
-      </TableCell>
+      <TableCell className="text-muted-foreground">há 15 minutos</TableCell>
       <TableCell>
         <div className="flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-slate-400" />
           <span className="font-medium text-muted-foreground">Pendente</span>
         </div>
       </TableCell>
-      <TableCell className="font-medium">
-        Diego Schell Fernandes
-      </TableCell>
+      <TableCell className="font-medium">Diego Schell Fernandes</TableCell>
       <TableCell className="font-medium">R$ 149,99</TableCell>
       <TableCell>
         <Button variant="outline" size="xs">

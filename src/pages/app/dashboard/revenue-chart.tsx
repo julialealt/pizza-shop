@@ -1,14 +1,20 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import colors from 'tailwindcss/colors';
-
 import {
   CartesianGrid,
   Line,
   LineChart,
   ResponsiveContainer,
   XAxis,
-  YAxis
-} from 'recharts';
+  YAxis,
+} from 'recharts'
+import colors from 'tailwindcss/colors'
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 
 const data = [
   { date: '10/12', revenue: 1200 },
@@ -25,7 +31,9 @@ export function RevenueChart() {
     <Card className="col-span-6">
       <CardHeader className="flex-row items-center justify-between pb-8">
         <div className="space-y-1">
-          <CardTitle className="text-base font-medium">Receita no período</CardTitle>
+          <CardTitle className="text-base font-medium">
+            Receita no período
+          </CardTitle>
           <CardDescription>Receita diária no período</CardDescription>
         </div>
       </CardHeader>
@@ -42,13 +50,19 @@ export function RevenueChart() {
               tickFormatter={(value: number) =>
                 value.toLocaleString('pt-BR', {
                   style: 'currency',
-                  currency: 'BRL'
-                })}
+                  currency: 'BRL',
+                })
+              }
             />
 
             <CartesianGrid vertical={false} className="stroke-muted" />
 
-            <Line type="linear" strokeWidth={2} dataKey="revenue" stroke={colors.violet['500']} />
+            <Line
+              type="linear"
+              strokeWidth={2}
+              dataKey="revenue"
+              stroke={colors.violet['500']}
+            />
           </LineChart>
         </ResponsiveContainer>
       </CardContent>
